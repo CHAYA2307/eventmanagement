@@ -1,77 +1,93 @@
 // js/auth.js
-const API_URL = "http://localhost:5000/api/auth"; // backend base URL
+(async () => {
+  const BASE_URL = "http://localhost:5000/api/auth";
 
-// Signup
-const signupBtn = document.getElementById("doSignup");
-if (signupBtn) {
-  signupBtn.addEventListener("click", async () => {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("su_email").value.trim();
-    const password = document.getElementById("su_password").value;
-    const msg = document.getElementById("signupMsg");
+  // Helper to show messages
+  function showMessage(el, msg, color = "red") {
+    el.style.color = color;
+    el.textContent = msg;
+  }
 
-    if (!name || !email || !password) {
-      msg.textContent = "Please fill all fields";
-      return;
-    }
+  // SIGNUP
+  const doSignupBtn = document.getElementById("doSignup");
+  if (doSignupBtn) {
+    doSignupBtn.addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("su_email").value.trim();
+      const password = document.getElementById("su_password").value.trim();
+      const msg = document.getElementById("signupMsg");
 
-    try {
-      const response = await fetch(`${API_URL}/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        msg.style.color = "green";
-        msg.textContent = "Signup successful! Redirecting...";
-        setTimeout(() => (window.location.href = "customer-dashboard.html"), 1500);
-      } else {
-        msg.style.color = "red";
-        msg.textContent = data.message || "Signup failed!";
+      if (!name || !email || !password) {
+        showMessage(msg, "Please fill all fields");
+        return;
       }
-    } catch (err) {
-      msg.textContent = "Error connecting to server.";
-    }
-  });
-}
 
-// Login
-const loginBtn = document.getElementById("doLogin");
-if (loginBtn) {
-  loginBtn.addEventListener("click", async () => {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const msg = document.getElementById("loginMsg");
+      try {
+        const res = await fetch(`${BASE_URL}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        });
 
-    if (!email || !password) {
-      msg.textContent = "Please enter email and password";
-      return;
-    }
+        const data = await res.json();
 
-    try {
-      const response = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        msg.style.color = "green";
-        msg.textContent = "Login successful! Redirecting...";
-        localStorage.setItem("token", data.token); // save token for later use
-        setTimeout(() => (window.location.href = "customer-dashboard.html"), 1500);
-      } else {
-        msg.style.color = "red";
-        msg.textContent = data.message || "Invalid credentials!";
+        if (res.ok) {
+          showMessage(msg, "Account created successfully! Redirecting...", "#7c5cff");
+          localStorage.setItem("es_token", data.token);
+          setTimeout(() => (window.location.href = "customer-dashboard.html"), 800);
+        } else {
+          showMessage(msg, data.message || "Signup failed");
+        }
+      } catch (err) {
+        console.error(err);
+        showMessage(msg, "Server error, please try again later");
       }
-    } catch (err) {
-      msg.textContent = "Error connecting to server.";
-    }
-  });
-}
+    });
+  }
+
+  // LOGIN
+  const doLoginBtn = document.getElementById("doLogin");
+  if (doLoginBtn) {
+    doLoginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msg = document.getElementById("loginMsg");
+
+      if (!email || !password) {
+        showMessage(msg, "Enter email and password");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${BASE_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          showMessage(msg, "Login successful! Redirecting...", "#7c5cff");
+          localStorage.setItem("es_token", data.token);
+          setTimeout(() => (window.location.href = "customer-dashboard.html"), 800);
+        } else {
+          showMessage(msg, data.message || "Invalid credentials");
+        }
+      } catch (err) {
+        console.error(err);
+        showMessage(msg, "Server error, please try again later");
+      }
+    });
+  }
+
+  // Google OAuth Placeholder
+  const googleBtn = document.getElementById("googleLogin");
+  if (googleBtn) {
+    googleBtn.addEventListener("click", () => {
+      alert("Google OAuth not implemented yet. Please use email login.");
+    });
+  }
+})();
+
 
