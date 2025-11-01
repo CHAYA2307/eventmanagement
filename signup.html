@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Signup · EventSphere</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container" style="display:flex;min-height:70vh;align-items:center;justify-content:center">
+    <div class="card" style="max-width:520px;width:100%">
+      <h2 style="color:#e6eefc">Create your account</h2>
+      <p style="color:var(--muted)">Fast signup — we simulate secure hashing & JWT (connect a backend to make real).</p>
+
+      <input id="name" placeholder="Full name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin:8px 0">
+      <input id="su_email" placeholder="Email" type="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin:8px 0">
+      <input id="su_password" placeholder="Password" type="password" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin:8px 0">
+
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn" id="doSignup">Create account</button>
+        <button class="btn ghost" onclick="location.href='login.html'">Back</button>
+      </div>
+
+      <p id="signupMsg" style="margin-top:10px;color:var(--muted);font-size:13px"></p>
+    </div>
+  </main>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

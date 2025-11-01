@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Payment</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(to right, #001f3f, #003f7f);
+      color: white;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .payment-container {
+      margin-top: 120px;
+    }
+
+    .payment-card {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    }
+
+    button {
+      background: linear-gradient(90deg, #00b4d8, #0077b6);
+      color: #fff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #00b4d8;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      color: #000;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 350px;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from {transform: scale(0.8); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
+    }
+
+    .qr-code {
+      width: 180px;
+      height: 180px;
+      background: url('https://api.qrserver.com/v1/create-qr-code/?data=FakePaymentLink123&size=180x180') center/cover no-repeat;
+      margin: 20px auto;
+    }
+
+    .success {
+      color: green;
+      font-size: 22px;
+      margin-top: 20px;
+      font-weight: bold;
+      animation: glow 1.2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px lime; }
+      to { text-shadow: 0 0 20px yellowgreen; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Event Payment</h1>
+  </header>
+
+  <div class="payment-container">
+    <div class="payment-card">
+      <h2>Confirm Payment</h2>
+      <p>Amount: ₹499</p>
+      <p>Event: Family Gathering Fest</p>
+      <button id="payNow">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="qrModal">
+    <div class="modal-content" id="modalContent">
+      <h3>Scan to Pay</h3>
+      <div class="qr-code"></div>
+      <button id="scanBtn">✅ I have paid</button>
+    </div>
+  </div>
+
+  <script>
+    const payBtn = document.getElementById("payNow");
+    const qrModal = document.getElementById("qrModal");
+    const scanBtn = document.getElementById("scanBtn");
+    const modalContent = document.getElementById("modalContent");
+
+    payBtn.onclick = () => {
+      qrModal.style.display = "flex";
+    };
+
+    scanBtn.onclick = () => {
+      modalContent.innerHTML = `
+        <h2 class="success">✅ Payment Successful!</h2>
+        <p>Thank you for registering 🎉</p>
+      `;
+      setTimeout(() => {
+        window.location.href = "success.html"; // Redirect after success
+      }, 2000);
+    };
+
+    window.onclick = (e) => {
+      if (e.target === qrModal) qrModal.style.display = "none";
+    };
+  </script>
+</body>
+</html>

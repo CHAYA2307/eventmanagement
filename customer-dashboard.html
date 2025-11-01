@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dashboard · EventSphere</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <header class="header card" style="align-items:center">
+      <div class="brand"><div class="logo">ES</div><div>EventSphere</div></div>
+      <div class="nav">
+        <button id="toggleTheme" class="btn ghost">Theme</button>
+        <button id="logoutBtn" class="btn ghost">Logout</button>
+      </div>
+    </header>
+
+    <section class="hero card" style="margin-top:18px">
+      <div>
+        <h1 style="margin:0;color:#e6eefc">Hello, <span id="displayName">Guest</span></h1>
+        <p style="color:var(--muted)">Manage your registrations and payments below.</p>
+      </div>
+      <div style="text-align:right">
+        <button class="btn" id="createQR">My QR</button>
+      </div>
+    </section>
+
+    <section style="margin-top:16px;display:grid;grid-template-columns:2fr 1fr;gap:14px">
+      <div class="card">
+        <h3 style="margin-top:0;color:#e6eefc">Browse events</h3>
+        <div id="eventsGrid" class="grid"></div>
+      </div>
+
+      <aside class="card">
+        <h3 style="margin-top:0;color:#e6eefc">My registrations</h3>
+        <div id="registeredList"></div>
+      </aside>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="modalRoot"><div class="modal" id="modalContent"></div></div>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

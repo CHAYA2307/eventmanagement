@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin · EventSphere</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <header class="header card" style="align-items:center">
+      <div class="brand"><div class="logo">ES</div><div>Admin</div></div>
+      <div class="nav">
+        <input id="adminSecret" placeholder="Admin passkey" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)">
+        <button id="btnAddEvent" class="btn">Add Event</button>
+      </div>
+    </header>
+
+    <section class="card" style="margin-top:18px">
+      <h3 style="margin-top:0;color:#e6eefc">Events & registrations</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn" id="exportCSV">Export CSV</button>
+        <button class="btn ghost" id="genQR">Generate QR</button>
+      </div>
+      <div id="regsList" style="margin-top:12px"></div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="modalRoot"><div class="modal" id="modalContent"></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
