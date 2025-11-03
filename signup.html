@@ -5,25 +5,98 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Signup | Event Management</title>
   <link rel="stylesheet" href="css/style.css"/>
+
+  <style>
+    /* ✅ Keep same background as home page */
+    body {
+      background: url("images/bg-home.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+    }
+
+    /* Overlay for better readability */
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      margin: 8px 0;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #0066ff;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #3388ff;
+    }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h2 {
+      color: #e6eefc;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: var(--muted, rgba(255, 255, 255, 0.7));
+    }
+  </style>
 </head>
 <body>
-  <main class="container" style="display:flex;min-height:70vh;align-items:center;justify-content:center">
-    <div class="card" style="max-width:520px;width:100%">
-      <h2 style="color:#e6eefc">Create your account</h2>
-      <p style="color:var(--muted)">Sign up to start managing your events easily.</p>
+  <div class="overlay">
+    <main class="container" style="display:flex;min-height:70vh;align-items:center;justify-content:center">
+      <div class="card" style="max-width:520px;width:100%">
+        <h2>Create your account</h2>
+        <p>Sign up to start managing your events easily.</p>
 
-      <input id="name" placeholder="Full name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);margin:8px 0">
-      <input id="su_email" placeholder="Email" type="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);margin:8px 0">
-      <input id="su_password" placeholder="Password" type="password" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);margin:8px 0">
+        <input id="name" placeholder="Full name">
+        <input id="su_email" placeholder="Email" type="email">
+        <input id="su_password" placeholder="Password" type="password">
 
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button class="btn" id="doSignup">Create account</button>
-        <button class="btn ghost" onclick="location.href='customer-login.html'">Back</button>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn" id="doSignup">Create account</button>
+          <button class="btn ghost" onclick="location.href='customer-login.html'">Back</button>
+        </div>
+
+        <p id="signupMsg" style="margin-top:10px;color:var(--muted);font-size:13px"></p>
       </div>
-
-      <p id="signupMsg" style="margin-top:10px;color:var(--muted);font-size:13px"></p>
-    </div>
-  </main>
+    </main>
+  </div>
 
   <script src="js/auth.js"></script>
 </body>
