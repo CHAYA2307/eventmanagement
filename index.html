@@ -3,38 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event Management System</title>
+  <title>EventSphere | Event Management System</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="slideshow"></div>
+  <!-- ===== Animated Background Slideshow ===== -->
+  <div class="slideshow-container">
+    <div class="slide fade" style="background-image: url('https://www.mbatuts.com/wp-content/uploads/2019/11/Event-Planning-Business-in-plan.jpg');"></div>
+    <div class="slide fade" style="background-image: url('https://th.bing.com/th/id/R.e819d29e26f625eb0a7997e98d0151b9?rik=w9vvwJESjw9FFg&riu=http%3a%2f%2fwww.exhibitionboothmalaysia.com%2fwp-content%2fuploads%2fEvent-Management-service-AnnualDinner.jpg&ehk=XwrWGwmuaGY8zHm%2bYOooI3YfEpUU2LT8buyW%2fLbZguM%3d&risl=&pid=ImgRaw&r=0');"></div>
+    <div class="slide fade" style="background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20240704/pngtree-new-event-management-outdoor-background-image_15957681.jpg');"></div>
+    <div class="slide fade" style="background-image: url('https://th.bing.com/th/id/OIP.umxw1LVdnDUH7Mw8Xyn63wHaE7?w=278&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3');"></div>
+  </div>
 
+  <!-- ===== Overlay Header ===== -->
   <header>
-    <div class="site-title"> Event Management</div>
+    <h1 class="site-title">✨ EventSphere ✨</h1>
     <nav>
-      <a href="#about">About Us</a>
+      <a href="#about">About</a>
       <a href="#events">Upcoming Events</a>
-      <a href="#contact">Contact Us</a>
-      <a href="#" class="btn">Login</a>
+      <a href="#contact">Contact</a>
+      <a href="login.html" class="btn">Login</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>Experience Events Like Never Before</h1>
-    
-    <a href="#events" class="btn">Explore Events</a>
+  <!-- ===== Hero Section ===== -->
+  <section id="banner">
+    <h2 class="banner-text">Discover, Book, and Celebrate!</h2>
+    <p>Join exciting events and experience unforgettable moments.</p>
+    <a href="#events" class="cta-btn">Explore Events</a>
   </section>
 
+  <!-- ===== Footer ===== -->
   <footer>
-    <div class="footer-icons">
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="X"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
+    <p>© 2025 EventSphere | Follow us</p>
+    <div class="social-icons">
+      <a href="#"><img src="assets/icons/facebook.svg" alt="Facebook" /></a>
+      <a href="#"><img src="assets/icons/instagram.svg" alt="Instagram" /></a>
+      <a href="#"><img src="assets/icons/x.svg" alt="X" /></a>
+      <a href="#"><img src="assets/icons/email.svg" alt="Email" /></a>
     </div>
-    <p>© 2025 Event Management | All Rights Reserved</p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
