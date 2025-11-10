@@ -6,47 +6,160 @@
 <title>Payment | Event Management</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  body,html{margin:0;padding:0;font-family:Poppins,sans-serif;background:#000;color:#fff;text-align:center;}
-  .slideshow{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-  .slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;animation:fade 18s infinite;}
-  @keyframes fade{0%,100%{opacity:0;}10%,90%{opacity:1;}}
-  .slide:nth-child(1){animation-delay:0s;}
-  .slide:nth-child(2){animation-delay:6s;}
-  .slide:nth-child(3){animation-delay:12s;}
-  .pay-box{margin:6rem auto;background:rgba(255,255,255,0.9);color:#000;border-radius:1.5rem;padding:2rem;max-width:600px;}
-  .upi-options{margin-top:1rem;}
-  .upi-options button{background:#0078ff;color:#fff;border:none;border-radius:1rem;padding:1rem 2rem;margin:0.5rem;cursor:pointer;}
-  img.qr{width:200px;height:200px;margin:1rem auto;display:block;}
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    color: #fff;
+    text-align: center;
+  }
+
+  .slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fade 18s infinite;
+  }
+
+  @keyframes fade {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
+  }
+
+  .slide:nth-child(1) { animation-delay: 0s; }
+  .slide:nth-child(2) { animation-delay: 6s; }
+  .slide:nth-child(3) { animation-delay: 12s; }
+
+  .pay-box {
+    margin: 6rem auto;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .upi-options {
+    margin-top: 1rem;
+  }
+
+  .upi-options button {
+    background: #0078ff;
+    color: #fff;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .upi-options button:hover {
+    background: #005fcc;
+  }
+
+  img.qr {
+    width: 200px;
+    height: 200px;
+    margin: 1rem auto;
+    display: block;
+    border-radius: 10px;
+  }
+
+  .status-message {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .success {
+    color: green;
+  }
+
+  .failure {
+    color: red;
+  }
+
+  .btn {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 0.8rem 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #333;
+  }
 </style>
 </head>
 <body>
+
+<!-- Slideshow Background -->
 <div class="slideshow">
   <div class="slide" style="background-image:url('images/bg1.jpg');"></div>
   <div class="slide" style="background-image:url('images/bg2.jpg');"></div>
   <div class="slide" style="background-image:url('images/bg3.jpg');"></div>
 </div>
 
+<!-- Payment Box -->
 <div class="pay-box" id="pay">
   <h1>Payment Details</h1>
 </div>
 
 <script>
   const params = new URLSearchParams(window.location.search);
-  const event = params.get('event');
+  const event = params.get('event') || "Event Registration";
   const cost = params.get('cost') || 500;
 
-  document.getElementById('pay').innerHTML += `
+  const payBox = document.getElementById('pay');
+
+  payBox.innerHTML += `
     <h2>${event}</h2>
-    <p>Total Expenses: ₹${cost}</p>
+    <p><strong>Total Expenses:</strong> ₹${cost}</p>
     <h3>Registration Fee: ₹500</h3>
-    <img src="images/qr.png" alt="QR Code" class="qr">
+    <img src="data:image/webp;base64,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" alt="QR Code" class="qr">
     <h3>Scan & Pay</h3>
     <div class="upi-options">
-      <button>Pay via UPI</button>
-      <button>Pay via Card</button>
-      <button>Pay via NetBanking</button>
+      <button onclick="makePayment('UPI')">Pay via UPI</button>
+      <button onclick="makePayment('Card')">Pay via Card</button>
+      <button onclick="makePayment('NetBanking')">Pay via NetBanking</button>
     </div>
+    <div class="status-message" id="status"></div>
+    <button class="btn" onclick="window.location.href='events.html'">⬅ Back to Events</button>
   `;
+
+  function makePayment(method) {
+    const status = document.getElementById('status');
+    status.innerHTML = `<span style="color:#000;">Processing ${method} Payment...</span>`;
+
+    setTimeout(() => {
+      const success = Math.random() > 0.4; // 60% chance of success
+      if (success) {
+        status.innerHTML = `<span class="success">✅ Payment Successful via ${method}!</span>`;
+      } else {
+        status.innerHTML = `<span class="failure">❌ Payment Failed via ${method}. Please try again.</span>`;
+      }
+    }, 1500);
+  }
 </script>
+
 </body>
 </html>

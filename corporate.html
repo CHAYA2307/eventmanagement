@@ -7,6 +7,109 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <style>
+  /* Background slideshow */
+  .slideshow {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    animation: fade 18s infinite;
+  }
+  .slideshow img:nth-child(2) { animation-delay: 6s; }
+  .slideshow img:nth-child(3) { animation-delay: 12s; }
+
+  @keyframes fade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* Back button */
+  .btn.ghost {
+    background: transparent;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  header.navbar h1 {
+    color: #222;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Main content box */
+  .event-detail-container {
+    max-width: 1200px;
+    margin: 120px auto;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    color: #222;
+  }
+
+  .event-card {
+    margin-bottom: 40px;
+  }
+
+  .event-card img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .event-card h3 {
+    color: #b30000;
+    margin-top: 15px;
+  }
+
+  ul, p {
+    line-height: 1.6;
+  }
+
+  .btn {
+    background: #b30000;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .btn:hover {
+    background: #8c0000;
+  }
+</style>
 
   <!-- Header -->
   <header class="navbar">
@@ -25,31 +128,91 @@
           <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" alt="Conference">
           <h3>Conference</h3>
           <p>Professional setups with modern audio-visual systems and catering.</p>
+          <ul>
+  <li><strong>Conference Meeting Package</strong>
+    <ul>
+      <p>Guest Count: Up to 80 attendees</p>
+      <p>Venue Setup: Professional conference hall with projector and seating arrangement</p>
+      <p>Activities: Business presentations, networking sessions, and panel discussions</p>
+      <p>Catering: Tea, coffee, and buffet lunch service</p>
+      <p>Photography: 1 professional photographer for coverage</p>
+      <p>Audio Visual: High-quality mic and sound system</p>
+      <p>Duration: Full day (8 hours)</p>
+      <li><strong>Estimated Expenses</strong></li>
+      <ul>
+        <p>Venue: ₹60,000</p>
+        <p>Decoration: ₹15,000</p>
+        <p>Catering: ₹70,000</p>
+        <p>Equipment & AV: ₹40,000</p>
+      </ul>
+      <p><strong>Total: ₹1,85,000</strong></p>
+      <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
+    </ul>
+  </li>
+</ul>
+
         </div>
 
         <div class="event-card">
           <img src="https://images.pexels.com/photos/3184302/pexels-photo-3184302.jpeg" alt="Seminar">
           <h3>Seminar</h3>
           <p>Educational and inspirational sessions for your team and clients.</p>
+          <ul>
+  <li><strong>Seminar Package</strong>
+    <ul>
+      <p>Guest Count: Up to 100 participants</p>
+      <p>Venue Setup: Auditorium or seminar hall with stage and podium</p>
+      <p>Activities: Keynote sessions, Q&A interactions, and certificate distribution</p>
+      <p>Catering: Tea, snacks, and lunch buffet</p>
+      <p>Photography: 1 professional photographer for full-day coverage</p>
+      <p>Audio Visual: Projector, screen, microphones, and lighting setup</p>
+      <p>Duration: 6 hours</p>
+      <li><strong>Estimated Expenses</strong></li>
+      <ul>
+        <p>Venue: ₹50,000</p>
+        <p>Decoration: ₹10,000</p>
+        <p>Catering: ₹60,000</p>
+        <p>Equipment & AV: ₹30,000</p>
+      </ul>
+      <p><strong>Total: ₹1,50,000</strong></p>
+      <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
+    </ul>
+  </li>
+</ul>
+
         </div>
 
         <div class="event-card">
           <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg" alt="Team Building">
           <h3>Team Building</h3>
           <p>Fun outdoor and indoor activities to strengthen collaboration.</p>
+          <ul>
+  <li><strong>Team Building Package</strong>
+    <ul>
+      <p>Guest Count: Up to 50 employees</p>
+      <p>Venue Setup: Outdoor resort or adventure camp</p>
+      <p>Activities: Ice-breaking sessions, trust-building games, obstacle courses, and group challenges</p>
+      <p>Catering: Breakfast, lunch, and evening snacks with beverages</p>
+      <p>Photography: 1 photographer and 1 videographer for full-day coverage</p>
+      <p>Entertainment: DJ, music system, and campfire setup</p>
+      <p>Duration: Full day (8 hours)</p>
+      <li><strong>Estimated Expenses</strong></li>
+      <ul>
+        <p>Venue: ₹60,000</p>
+        <p>Decoration: ₹15,000</p>
+        <p>Catering: ₹50,000</p>
+        <p>Photography & Entertainment: ₹25,000</p>
+      </ul>
+      <p><strong>Total: ₹1,50,000</strong></p>
+      <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
+    </ul>
+  </li>
+</ul>
+
         </div>
       </div>
 
-      <h3>Estimated Expenses</h3>
-      <ul>
-        <li>Venue: ₹80,000</li>
-        <li>Decoration: ₹25,000</li>
-        <li>Catering: ₹70,000</li>
-        <li>Equipment & AV: ₹50,000</li>
-      </ul>
-      <p><strong>Total: ₹2,25,000</strong></p>
-
-      <button class="btn" onclick="alert('Redirecting to registration...')">Register Now</button>
+      
     </div>
   </main>
 

@@ -6,31 +6,112 @@
   <title>Wedding Events | Event Management</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .slideshow {
-      width: 100%;
-      height: 400px;
-      overflow: hidden;
-      position: relative;
-    }
-    .slideshow img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      animation: fade 12s infinite;
-    }
-    .slideshow img:nth-child(2) { animation-delay: 4s; }
-    .slideshow img:nth-child(3) { animation-delay: 8s; }
-    @keyframes fade {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      33% { opacity: 1; }
-      43% { opacity: 0; }
-      100% { opacity: 0; }
-    }
-  </style>
+  /* Background slideshow */
+  .slideshow {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .slideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    animation: fade 18s infinite;
+  }
+  .slideshow img:nth-child(2) { animation-delay: 6s; }
+  .slideshow img:nth-child(3) { animation-delay: 12s; }
+
+  @keyframes fade {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* Back button */
+  .btn.ghost {
+    background: transparent;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  header.navbar h1 {
+    color: #222;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Main content box */
+  .event-detail-container {
+    max-width: 1200px;
+    margin: 120px auto;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    color: #222;
+  }
+
+  .event-card {
+    margin-bottom: 40px;
+  }
+
+  .event-card img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .event-card h3 {
+    color: #b30000;
+    margin-top: 15px;
+  }
+
+  ul, p {
+    line-height: 1.6;
+  }
+
+  .btn {
+    background: #b30000;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .btn:hover {
+    background: #8c0000;
+  }
+</style>
+
 </head>
 <body class="main-bg">
+  
   <header class="navbar">
     <button class="btn ghost" onclick="window.history.back()">⬅ Back</button>
     <h1>Wedding Celebrations</h1>
@@ -44,8 +125,7 @@
 
     <main class="event-detail-container">
     <div class="event-detail-card">
-      <h2> wedding Programs</h2>
-      <p>Make every moment a memorable experience with our customized packages.</p>
+      
       <div class="event-subtype-container">
         <div class="event-card">
           <img src="https://i.pinimg.com/originals/8c/35/63/8c35632043e868076c8685665f161c0c.jpg" alt="Kerala wedding">
@@ -53,37 +133,67 @@
 <ul>
   <li><strong>Essential Traditional Package</strong>
     <ul>
-      <li>Guest Count: Up to 150</li>
-      <li>Venue Setup: Traditional Kerala décor with banana leaves, lamps, and floral arrangements</li>
-      <li>Rituals Covered: Nischayam, Thaali Kettu, Kanyadaanam, Sadhya</li>
-      <li>Catering: Authentic Kerala vegetarian Sadhya</li>
-      <li>Photography: 1 photographer + 1 videographer</li>
-      <li>Music: Nadaswaram or Chenda Melam</li>
-      <li>Duration: 1 day</li>
+      <p>Guest Count: Up to 150</p>
+      <p>Venue Setup: Traditional Kerala décor with banana leaves, lamps, and floral arrangements</p>
+      <p>Rituals Covered: Nischayam, Thaali Kettu, Kanyadaanam, Sadhya</p>
+      <p>Catering: Authentic Kerala vegetarian Sadhya</p>
+      <p>Photography: 1 photographer + 1 videographer</p>
+      <p>Music: Nadaswaram or Chenda Melam</p>
+      <p>Duration: 1 day</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹50,000</li>
+      <li>Decoration: ₹15,000</li>
+      <li>Catering: ₹25,000</li>
+      <li>Photography: ₹30,000</li>
+    </ul>
+    <p><strong>Total: ₹1,20,000</strong></p>
+
+    <button class="btn" onclick="alert('Redirecting to registration...')">Register Now</button>
     </ul>
   </li>
 
   <li><strong>Classic Cultural Package</strong>
     <ul>
-      <li>Guest Count: Up to 300</li>
-      <li>Venue Setup: Themed décor with floral mandap, lighting, and seating</li>
-      <li>Rituals Covered: Full wedding day + Mehendi & Haldi</li>
-      <li>Catering: Multi-cuisine with Kerala Sadhya</li>
-      <li>Photography: 2 photographers + cinematic videography</li>
-      <li>Music & Entertainment: Live Kerala folk performance or classical dance</li>
-      <li>Duration: 2 days</li>
+      <p>Guest Count: Up to 300</p>
+      <p>Venue Setup: Themed décor with floral mandap, lighting, and seating</p>
+      <p>Rituals Covered: Full wedding day + Mehendi & Haldi</p>
+      <p>Catering: Multi-cuisine with Kerala Sadhya</p>
+      <p>Photography: 2 photographers + cinematic videography</p>
+      <p>Music & Entertainment: Live Kerala folk performance or classical dance</p>
+      <p>Duration: 2 days</p>
+       h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹60,000</li>
+      <li>Decoration: ₹25,000</li>
+      <li>Catering: ₹40,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹1,65,000</strong></p>
+
+    <button class="btn" onclick="alert('Redirecting to registration...')">Register Now</button>
     </ul>
   </li>
 
   <li><strong>Royal Heritage Package</strong>
     <ul>
-      <li>Guest Count: 500+</li>
-      <li>Venue Setup: Premium décor with custom themes (temple-style, beach, palace)</li>
-      <li>Rituals Covered: Full wedding week: Nischayam, Mehendi, Haldi, Wedding, Reception</li>
-      <li>Catering: Gourmet multi-course meals with Kerala, North Indian, and Continental options</li>
-      <li>Photography: Full team with drone, live streaming, and pre-wedding shoot</li>
-      <li>Music & Entertainment: Celebrity performers, DJ, and traditional ensembles</li>
-      <li>Duration: 3–5 days</li>
+      <p>Guest Count: 500+</p>
+      <p>Venue Setup: Premium décor with custom themes (temple-style, beach, palace)</p>
+      <p>Rituals Covered: Full wedding week: Nischayam, Mehendi, Haldi, Wedding, Reception</p>
+      <p>Catering: Gourmet multi-course meals with Kerala, North Indian, and Continental options</p>
+      <p>Photography: Full team with drone, live streaming, and pre-wedding shoot</p>
+      <p>Music & Entertainment: Celebrity performers, DJ, and traditional ensembles</p>
+      <p>Duration: 3–5 days</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹1,50,000</li>
+      <li>Decoration: ₹50,000</li>
+      <li>Catering: ₹1,00,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹3,40,000</strong></p>
+
+    <button class="btn" onclick="alert('Redirecting to registration...')">Register Now</button>
     </ul>
   </li>
 </ul>
@@ -97,37 +207,65 @@
 <ul>
   <li><strong>Seaside Serenity Package</strong>
     <ul>
-      <li>Guest Count: Up to 100</li>
-      <li>Venue Setup: Minimalist beach altar with floral arch and bamboo seating</li>
-      <li>Rituals Covered: Basic wedding ceremony with officiant and symbolic rituals</li>
-      <li>Catering: Light refreshments or cocktail-style beach buffet</li>
-      <li>Photography: 1 photographer + candid beach shoot</li>
-      <li>Music: Acoustic guitar or soft instrumental playlist</li>
-      <li>Duration: Half-day event</li>
+      <p>Guest Count: Up to 100</p>
+      <p>Venue Setup: Minimalist beach altar with floral arch and bamboo seating</p>
+      <p>Rituals Covered: Basic wedding ceremony with officiant and symbolic rituals</p>
+      <p>Catering: Light refreshments or cocktail-style beach buffet</p>
+      <p>Photography: 1 photographer + candid beach shoot</p>
+      <p>Music: Acoustic guitar or soft instrumental playlist</p>
+      <p>Duration: Half-day event</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹50,000</li>
+      <li>Decoration: ₹15,000</li>
+      <li>Catering: ₹25,000</li>
+      <li>Photography: ₹10,000</li>
     </ul>
+    <p><strong>Total: ₹1,00,000</strong></p>
+
+<button class="btn" onclick="window.location.href='payment.html'">Register Now</button>    </ul>
   </li>
 
   <li><strong>Tropical Bliss Package</strong>
     <ul>
-      <li>Guest Count: Up to 250</li>
-      <li>Venue Setup: Themed beach décor with canopy, lanterns, and floral aisle</li>
-      <li>Rituals Covered: Full wedding ceremony + Mehendi or Haldi by the shore</li>
-      <li>Catering: Multi-cuisine buffet with seafood and tropical drinks</li>
-      <li>Photography: 2 photographers + cinematic videography + drone shots</li>
-      <li>Music & Entertainment: Live band or DJ with beach dance floor</li>
-      <li>Duration: 1–2 days</li>
+      <p>Guest Count: Up to 250</p>
+      <p>Venue Setup: Themed beach décor with canopy, lanterns, and floral aisle</p>
+      <p>Rituals Covered: Full wedding ceremony + Mehendi or Haldi by the shore</p>
+      <p>Catering: Multi-cuisine buffet with seafood and tropical drinks</p>
+      <p>Photography: 2 photographers + cinematic videography + drone shots</p>
+      <p>Music & Entertainment: Live band or DJ with beach dance floor</p>
+      <p>Duration: 1–2 days</p>
+      h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹60,000</li>
+      <li>Decoration: ₹25,000</li>
+      <li>Catering: ₹40,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹1,65,000</strong></p>
+
+   <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
     </ul>
   </li>
 
   <li><strong>Luxury Coastal Affair Package</strong>
     <ul>
-      <li>Guest Count: 300+</li>
-      <li>Venue Setup: Luxury beach resort with custom décor, lighting, and lounge zones</li>
-      <li>Rituals Covered: Multi-day celebration: Welcome party, Mehendi, Haldi, Wedding, Reception</li>
-      <li>Catering: Gourmet dining with curated menus, cocktails, and beachside service</li>
-      <li>Photography: Full team with pre-wedding shoot, drone, live streaming</li>
-      <li>Music & Entertainment: Celebrity performers, fire show, and beach fireworks</li>
-      <li>Duration: 3–4 days</li>
+      <p>Guest Count: 300+</p>
+      <p>Venue Setup: Luxury beach resort with custom décor, lighting, and lounge zones</p>
+      <p>Rituals Covered: Multi-day celebration: Welcome party, Mehendi, Haldi, Wedding, Reception</p>
+      <p>Catering: Gourmet dining with curated menus, cocktails, and beachside service</p>
+      <p>Photography: Full team with pre-wedding shoot, drone, live streaming</p>
+      <p>Music & Entertainment: Celebrity performers, fire show, and beach fireworks</p>
+      <p>Duration: 3–4 days</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹1,50,000</li>
+      <li>Decoration: ₹50,000</li>
+      <li>Catering: ₹1,00,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹3,40,000</strong></p>
+<button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
     </ul>
   </li>
 </ul>
@@ -141,37 +279,67 @@
 <ul>
   <li><strong>Graceful Vows Package</strong>
     <ul>
-      <li>Guest Count: Up to 100</li>
-      <li>Venue Setup: Basic church décor with white flowers and pew ribbons</li>
-      <li>Ceremony Coverage: Church wedding with priest, choir, and altar arrangements</li>
-      <li>Catering: Light refreshments or tea service post-ceremony</li>
-      <li>Photography: 1 photographer + candid ceremony coverage</li>
-      <li>Music: Church organist or recorded hymns</li>
-      <li>Duration: Half-day event</li>
+      <p>Guest Count: Up to 100</p>
+      <p>Venue Setup: Basic church décor with white flowers and pew ribbons</p>
+      <p>Ceremony Coverage: Church wedding with priest, choir, and altar arrangements</p>
+      <p>Catering: Light refreshments or tea service post-ceremony</p>
+      <p>Photography: 1 photographer + candid ceremony coverage</p>
+      <p>Music: Church organist or recorded hymns</p>
+      <p>Duration: Half-day event</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹50,000</li>
+      <li>Decoration: ₹15,000</li>
+      <li>Catering: ₹25,000</li>
+      <li>Photography: ₹10,000</li>
+    </ul>
+    <p><strong>Total: ₹1,00,000</strong></p>
+
+   <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
     </ul>
   </li>
 
   <li><strong>Elegant Blessings Package</strong>
     <ul>
-      <li>Guest Count: Up to 250</li>
-      <li>Venue Setup: Themed floral décor, aisle runner, and altar lighting</li>
-      <li>Ceremony Coverage: Full church service + bridal procession coordination</li>
-      <li>Catering: Buffet lunch or dinner with multi-cuisine options</li>
-      <li>Photography: 2 photographers + cinematic videography</li>
-      <li>Music & Entertainment: Live choir or string quartet</li>
-      <li>Duration: 1-day event</li>
+      <p>Guest Count: Up to 250</p>
+      <p>Venue Setup: Themed floral décor, aisle runner, and altar lighting</p>
+      <p>Ceremony Coverage: Full church service + bridal procession coordination</p>
+      <p>Catering: Buffet lunch or dinner with multi-cuisine options</p>
+      <p>Photography: 2 photographers + cinematic videography</p>
+      <p>Music & Entertainment: Live choir or string quartet</p>
+      <p>Duration: 1-day event</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹60,000</li>
+      <li>Decoration: ₹25,000</li>
+      <li>Catering: ₹40,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹1,65,000</strong></p>
+
+   <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
     </ul>
   </li>
 
   <li><strong>Heavenly Union Package</strong>
     <ul>
-      <li>Guest Count: 300+</li>
-      <li>Venue Setup: Premium décor with floral arches, custom pew styling, and lighting design</li>
-      <li>Ceremony Coverage: Multi-day celebration: Rehearsal, Church Wedding, Reception</li>
-      <li>Catering: Gourmet dining with curated menus and dessert stations</li>
-      <li>Photography: Full team with drone, live streaming, and pre-wedding shoot</li>
-      <li>Music & Entertainment: Choir, live band, and reception DJ</li>
-      <li>Duration: 2–3 days</li>
+      <p>Guest Count: 300+</p>
+      <p>Venue Setup: Premium décor with floral arches, custom pew styling, and lighting design</p>
+      <p>Ceremony Coverage: Multi-day celebration: Rehearsal, Church Wedding, Reception</p>
+      <p>Catering: Gourmet dining with curated menus and dessert stations</p>
+      <p>Photography: Full team with drone, live streaming, and pre-wedding shoot</p>
+      <p>Music & Entertainment: Choir, live band, and reception DJ</p>
+      <p>Duration: 2–3 days</p>
+      <h3>Estimated Expenses</h3>
+    <ul>
+      <li>Venue: ₹1,00,000</li>
+      <li>Decoration: ₹50,000</li>
+      <li>Catering: ₹50,000</li>
+      <li>Photography: ₹40,000</li>
+    </ul>
+    <p><strong>Total: ₹2,40,000</strong></p>
+
+   <button class="btn" onclick="window.location.href='payment.html'">Register Now</button>
     </ul>
   </li>
 </ul>
@@ -180,16 +348,7 @@
       </div>
 
     
-    <h3>Estimated Expenses</h3>
-    <ul>
-      <li>Venue: ₹1,50,000</li>
-      <li>Decoration: ₹50,000</li>
-      <li>Catering: ₹1,00,000</li>
-      <li>Photography: ₹40,000</li>
-    </ul>
-    <p><strong>Total: ₹3,40,000</strong></p>
-
-    <button class="btn" onclick="alert('Redirecting to registration...')">Register Now</button>
+    
   </main>
 </body>
 </html>
