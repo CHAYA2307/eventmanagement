@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Event Management</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Background slideshow */
+        .background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            animation: slide 30s infinite;
+        }
+
+        @keyframes slide {
+            0% { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
+            25% { background-image: url('https://images.unsplash.com/photo-1531058020387-3be344556be6'); }
+            50% { background-image: url('https://images.unsplash.com/photo-1515169067865-5387ec356754'); }
+            75% { background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d'); }
+            100% { background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); }
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 0;
+            text-align: center;
+            color: white;
+            font-size: 22px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        /* Content Box */
+        .about-container {
+            background: rgba(0, 0, 0, 0.5);  /* translucent dark overlay */
+            color: #fff;
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ffcc00;
+        }
+
+        p {
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+    </div>
+
+    <div class="about-container">
+        <h1>About Our Event Management System</h1>
+        <p>
+            Welcome to our Event Management System, designed to simplify event organization and enhance user experience.
+            Whether you are an admin managing events or a customer exploring upcoming programs, our platform ensures smooth navigation, 
+            real-time updates, and intelligent event recommendations.
+        </p>
+        <p>
+            Developed by passionate creators, this system aims to bridge technology with celebration — making every occasion smarter, 
+            faster, and more memorable.
+        </p>
+    </div>
+
+    <div class="footer">
+        © 2025 Event Management System | 
+    </div>
+</body>
+</html>
