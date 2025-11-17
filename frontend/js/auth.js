@@ -1,9 +1,7 @@
-// js/auth.js (NO BACKEND VERSION)
-// Fully working signup + login WITHOUT server.
+// js/auth.js (BACKEND VERSION)
+(async () => {
+  const BASE_URL = "http://localhost:5000/api/auth";
 
-(() => {
-
-  // Helper
   function showMessage(el, msg, color = "red") {
     el.style.color = color;
     el.textContent = msg;
@@ -12,7 +10,7 @@
   // SIGNUP
   const doSignupBtn = document.getElementById("doSignup");
   if (doSignupBtn) {
-    doSignupBtn.addEventListener("click", () => {
+    doSignupBtn.addEventListener("click", async () => {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("su_email").value.trim();
       const password = document.getElementById("su_password").value.trim();
@@ -23,28 +21,32 @@
         return;
       }
 
-      // check if account exists
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      if (users.some(u => u.email === email)) {
-        showMessage(msg, "Account already exists");
-        return;
+      try {
+        const res = await fetch(`${BASE_URL}/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          showMessage(msg, "Account created! Redirecting...", "#7c5cff");
+          localStorage.setItem("es_token", data.token);
+          setTimeout(() => (window.location.href = "index.html"), 1000);
+        } else {
+          showMessage(msg, data.msg || "Signup failed");
+        }
+      } catch (err) {
+        showMessage(msg, "Server error, try later");
       }
-
-      // save user
-      users.push({ name, email, password });
-      localStorage.setItem("users", JSON.stringify(users));
-
-      showMessage(msg, "Account created successfully! Redirecting...", "#7c5cff");
-
-      setTimeout(() => (window.location.href = "index.html"), 1200);
     });
   }
-
 
   // LOGIN
   const doLoginBtn = document.getElementById("doLogin");
   if (doLoginBtn) {
-    doLoginBtn.addEventListener("click", () => {
+    doLoginBtn.addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
       const msg = document.getElementById("loginMsg");
@@ -54,17 +56,26 @@
         return;
       }
 
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const found = users.find(u => u.email === email && u.password === password);
+      try {
+        const res = await fetch(`${BASE_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
 
-      if (!found) {
-        showMessage(msg, "Invalid email or password");
-        return;
+        const data = await res.json();
+
+        if (res.ok) {
+          showMessage(msg, "Login successful! Redirecting...", "#7c5cff");
+          localStorage.setItem("es_token", data.token);
+          setTimeout(() => (window.location.href = "customer-dashboard.html"), 1000);
+        } else {
+          showMessage(msg, data.msg || "Invalid credentials");
+        }
+      } catch (err) {
+        console.error(err);
+        showMessage(msg, "Server error");
       }
- localStorage.setItem("loggedInUser", JSON.stringify(found));
-      showMessage(msg, "Login successful! Redirecting...", "#7c5cff");
-
-      setTimeout(() => (window.location.href = "customer-dashboard.html"), 1200);
     });
   }
 
