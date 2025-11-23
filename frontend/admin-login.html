@@ -19,7 +19,7 @@
 
   <section class="login-container">
     <h2>Admin Login</h2>
-    <form class="login-form">
+    <form id="adminLoginForm" class="login-form">
       <input type="email" placeholder="Admin Email" required>
       <input type="password" placeholder="Password" required>
       <input type="text" placeholder="Secret Passkey" required>
@@ -28,5 +28,15 @@
   </section>
 
   <script src="js/admin.js"></script>
+
+  <!-- Redirect to admin-dashboard after login -->
+  <script>
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    adminLoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Simple redirect; replace with real authentication later
+      window.location.href = 'admin-dashboard.html';
+    });
+  </script>
 </body>
 </html>
