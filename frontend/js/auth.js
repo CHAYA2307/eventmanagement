@@ -1,8 +1,7 @@
 (async () => {
-  // Dynamic backend URL: localhost for dev, production URL for live
-  const BASE_URL = window.location.hostname === "localhost"
-    ? "http://localhost:5000/api/auth"
-    : "https://yourproductiondomain.com/api/auth"; // replace with your deployed backend URL
+
+  // FIXED BACKEND URL FOR LOCAL DEVELOPMENT
+  const BASE_URL = "http://localhost:5000/api/auth";
 
   function showMessage(el, msg, color = "red") {
     el.style.color = color;
@@ -33,20 +32,17 @@
         });
 
         const data = await res.json();
+        console.log("Signup Response:", data);
 
         if (res.ok && data.token) {
-          showMessage(msg, "Signup successful! Redirecting...", "#7c5cff");
+          showMessage(msg, "Signup successful! Redirecting...", "green");
 
           localStorage.setItem("es_token", data.token);
           localStorage.setItem("user_role", data.user.role);
 
-          // Redirect based on role
           setTimeout(() => {
-            if (data.user.role === "admin") {
-              window.location.href = "admin-dashboard.html";
-            } else {
-              window.location.href = "customer-dashboard.html";
-            }
+            window.location.href =
+              data.user.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
           }, 1000);
 
         } else {
@@ -82,27 +78,23 @@
         });
 
         const data = await res.json();
-
-        console.log("Login response:", data);
+        console.log("Login Response:", data);
 
         if (res.ok && data.token) {
-          showMessage(msg, "Login successful! Redirecting...", "#7c5cff");
+          showMessage(msg, "Login successful! Redirecting...", "green");
 
           localStorage.setItem("es_token", data.token);
           localStorage.setItem("user_role", data.user.role);
 
-          // Redirect based on role
           setTimeout(() => {
-            if (data.user.role === "admin") {
-              window.location.href = "admin-dashboard.html";
-            } else {
-              window.location.href = "customer-dashboard.html";
-            }
+            window.location.href =
+              data.user.role === "admin" ? "admin-dashboard.html" : "customer-dashboard.html";
           }, 1000);
 
         } else {
           showMessage(msg, data.msg || "Invalid email or password");
         }
+
       } catch (err) {
         console.error(err);
         showMessage(msg, "Server error");

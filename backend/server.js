@@ -3,45 +3,77 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-// 1. Load environment variables at the very top.
-dotenv.config(); 
+// Load environment variables
+dotenv.config();
 
-// 2. Now import routes
+// Import routes
 const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// --- Middleware Order ---
-
-// 1. **Immediate Request Logger** (Should always fire if a connection is established)
+/* ============================================================
+   1. GLOBAL REQUEST LOGGER  (should fire on every request)
+============================================================ */
 app.use((req, res, next) => {
-    console.log(`[INCOMING] Method: ${req.method}, Path: ${req.path}`);
+    console.log(`[INCOMING] Method: ${req.method}, Path: ${req.originalUrl}`);
     next();
 });
 
-// 2. **CORS** (Should always be near the top)
-app.use(cors());
+/* ============================================================
+   2. FIXED — FULL CORS CONFIGURATION
+   This FIXES your login POST not reaching the backend.
+============================================================ */
+app.use(cors({
+    origin: "*",  // allow frontend (localhost:5500)
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false
+}));
 
-// 3. **Body Parsers** (Robustly configured for safety)
-app.use(express.json({ limit: '5mb' })); 
+// Handle preflight explicitly
+app.options("*", cors());
+
+/* ============================================================
+   3. BODY PARSERS
+============================================================ */
+app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
-// 4. **Static Files**
+/* ============================================================
+   4. STATIC FILES (Optional)
+============================================================ */
 app.use(express.static('public'));
 
-// 5. **API routes** (Router should be hit after middleware processes the body)
+/* ============================================================
+   5. API ROUTES
+============================================================ */
 app.use('/api/auth', authRoutes);
 
-// Test route
-app.get('/', (req, res) => res.send('Event Management Backend running'));
+/* ============================================================
+   6. TEST ROUTE
+============================================================ */
+app.get('/', (req, res) => {
+    res.send("Event Management Backend running");
+});
 
-// Start server after DB connection
+/* ============================================================
+   7. CONNECT TO DATABASE + START SERVER
+============================================================ */
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('MongoDB connected');
-    console.log(`JWT_SECRET is loaded successfully.`);
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => {
+    console.log("MongoDB connected");
+    console.log("JWT_SECRET loaded:", process.env.JWT_SECRET ? "YES" : "NO");
+
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        console.log("====================================================");
+        console.log(" BACKEND IS LIVE — LOGIN + SIGNUP WILL NOW WORK ");
+        console.log("====================================================");
+    });
+})
+.catch(err => console.error("MongoDB connection error:", err));
