@@ -1,13 +1,15 @@
 (async () => {
-  const BASE_URL = "http://localhost:5000/api/user";
+  // Dynamic backend URL: localhost for dev, production URL for live
+  const BASE_URL = window.location.hostname === "localhost"
+    ? "http://localhost:5000/api/auth"
+    : "https://yourproductiondomain.com/api/auth"; // replace with your deployed backend URL
 
-  // Helper to show messages
   function showMessage(el, msg, color = "red") {
     el.style.color = color;
     el.textContent = msg;
   }
 
-  // ===== SIGNUP =====
+  // ========== SIGNUP ==========
   const doSignupBtn = document.getElementById("doSignup");
   if (doSignupBtn) {
     doSignupBtn.addEventListener("click", async (e) => {
@@ -32,13 +34,23 @@
 
         const data = await res.json();
 
-        if (res.ok) {
+        if (res.ok && data.token) {
           showMessage(msg, "Signup successful! Redirecting...", "#7c5cff");
+
           localStorage.setItem("es_token", data.token);
           localStorage.setItem("user_role", data.user.role);
-          setTimeout(() => (window.location.href = "customer-dashboard.html"), 1000);
+
+          // Redirect based on role
+          setTimeout(() => {
+            if (data.user.role === "admin") {
+              window.location.href = "admin-dashboard.html";
+            } else {
+              window.location.href = "customer-dashboard.html";
+            }
+          }, 1000);
+
         } else {
-          showMessage(msg, data.msg || data.message || "Signup failed");
+          showMessage(msg, data.msg || "Signup failed");
         }
       } catch (err) {
         console.error(err);
@@ -47,7 +59,7 @@
     });
   }
 
-  // ===== LOGIN =====
+  // ========== LOGIN ==========
   const doLoginBtn = document.getElementById("doLogin");
   if (doLoginBtn) {
     doLoginBtn.addEventListener("click", async (e) => {
@@ -71,19 +83,25 @@
 
         const data = await res.json();
 
-        if (res.ok) {
+        console.log("Login response:", data);
+
+        if (res.ok && data.token) {
           showMessage(msg, "Login successful! Redirecting...", "#7c5cff");
+
           localStorage.setItem("es_token", data.token);
           localStorage.setItem("user_role", data.user.role);
 
           // Redirect based on role
-          if (data.user.role === "admin") {
-            setTimeout(() => (window.location.href = "admin-dashboard.html"), 1000);
-          } else {
-            setTimeout(() => (window.location.href = "customer-dashboard.html"), 1000);
-          }
+          setTimeout(() => {
+            if (data.user.role === "admin") {
+              window.location.href = "admin-dashboard.html";
+            } else {
+              window.location.href = "customer-dashboard.html";
+            }
+          }, 1000);
+
         } else {
-          showMessage(msg, data.msg || data.message || "Invalid credentials");
+          showMessage(msg, data.msg || "Invalid email or password");
         }
       } catch (err) {
         console.error(err);

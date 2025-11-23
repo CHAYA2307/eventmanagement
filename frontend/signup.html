@@ -1,49 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Signup | Event Management</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+    .container {
+      width: 350px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #ccc;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .msg {
+      margin-top: 10px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      display: none;
+    }
+    .success {
+      background: #c8f7c5;
+      color: #2d7a2d;
+    }
+    .error {
+      background: #f7c5c5;
+      color: #7a2d2d;
+    }
+  </style>
 </head>
-
 <body>
 
-  <!-- Background Slideshow -->
-  <div class="slideshow">
-    <div class="slide" style="background-image: url('images/bg1.jpg');"></div>
-    <div class="slide" style="background-image: url('images/bg2.jpg');"></div>
-    <div class="slide" style="background-image: url('images/bg3.jpg');"></div>
+  <div class="container">
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Enter your name" />
+    <input type="email" id="email" placeholder="Enter your email" />
+    <input type="password" id="password" placeholder="Enter password (min 6 chars)" />
+
+    <button onclick="registerUser()">Sign Up</button>
+
+    <div id="msgBox" class="msg"></div>
   </div>
 
-  <!-- Navigation -->
-  <header class="navbar">
-    <div class="logo">Event Management</div>
-    <nav>
-      <a href="index.html">Home</a>
-      
-      <a href="signup.html" class="active">Signup</a>
-    </nav>
-  </header>
+  <script>
+    async function registerUser() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const msgBox = document.getElementById("msgBox");
 
-  <!-- Centered Form -->
-  <main class="auth-container full-center">
-    <div class="auth-card vertical-stack">
-      <h2>Create Your Account</h2>
-      <p>Sign up to start managing your events easily.</p>
+      msgBox.style.display = "none";
 
-      <input id="name" type="text" placeholder="Full Name" />
-      <input id="su_email" type="email" placeholder="Email" />
-      <input id="su_password" type="password" placeholder="Password" />
+      if (!name || !email || !password) {
+        showMsg("Please fill all fields", "error");
+        return;
+      }
 
-      <button id="doSignup" class="btn">Create Account</button>
-      <button class="btn ghost" onclick="location.href='index.html'">Back</button>
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password })
+        });
 
-      <p id="signupMsg" class="muted"></p>
-    </div>
-  </main>
+        const data = await res.json();
 
-  <script src="js/auth.js"></script>
+        if (!res.ok) {
+          showMsg(data.msg || "Registration failed", "error");
+          return;
+        }
 
+        showMsg("Account created successfully!", "success");
+
+        // Clear form fields after success
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+
+      } catch (err) {
+        showMsg("Server error. Please try again.", "error");
+      }
+    }
+
+    function showMsg(message, type) {
+      const msgBox = document.getElementById("msgBox");
+      msgBox.innerText = message;
+      msgBox.className = "msg " + type;
+      msgBox.style.display = "block";
+    }
+  </script>
 </body>
 </html>
